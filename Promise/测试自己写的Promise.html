@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试自己写的Promise</title>
+</head>
+<body>
+</body>
+<script src="./Promise.js"></script>
+<script>
+    const p=new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(1)
+            // reject(2)
+            // console.log('reject()改变状态之后')
+        },100)
+    }).then(
+        value=>{
+            console.log('onResoled1():',value)
+        },
+        reason=>{
+            console.log('onReejected1():',reason)
+            // return new Promise((resolve,reject)=>reject(5))
+            return 3
+        },
+    )
+    // p.then(
+    //     value=>{
+    //         console.log('onResoled2():',value)
+    //     },
+    //     reason=>{
+    //         console.log('onReejected2():',reason)
+    //     },
+    // )
+</script>
+</html>

@@ -31,7 +31,7 @@ console.log(a+1)
 箭头函数的 this 取决于包裹箭头函数的第一个普通函数的 this 
 对于 bind 这类函数来说 只取决于第一个函数的 this 如果没有传 则是 window
 5.== 和 === 区别
-对于 == 来说
+对于 == 来说 
 判断对比的对象是否是相同类型如果是则直接比较如果不是就需要做类型转换
 判断对比的对象是否是 undefined 或者 null 如果是 直接返回 false
 比较两者是否是 String 或者 Number 如果是 就把 String 转换成 Number

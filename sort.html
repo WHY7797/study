@@ -45,31 +45,46 @@
         大于基准点的存储在右边的数组
         拼接数组然后左边与右边的数组继续比较存储，直到完成最后的排序
     */
-    function 快速排序(arr){
+    function 快速排序(arr) {
         //如果数组的长度<=1,则直接返回
-        if(arr.length<=1){return arr}
-        var pivotIndex=Math.floor(arr.length/2)
+        if (arr.length <= 1) { return arr }
+        var pivotIndex = Math.floor(arr.length / 2)
         //找基准，并把基准从原数组删除
-        var pivot=arr.splice(pivotIndex,1)[0]
+        var pivot = arr.splice(pivotIndex, 1)[0]
         //定义左右数组
-        var left=[]
-        var right=[]
+        var left = []
+        var right = []
         //比基准小的放在left，比基准大的放在right
-        for(var i=0;i<arr.length;i++){
-            if(arr[i]<=pivot){
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] <= pivot) {
                 left.push(arr[i]);
             }
-            else{
+            else {
                 right.push(arr[i]);
             }
         }
         //递归
         // return 快速排序(left).concat([pivot],快速排序(right));
-        return [...快速排序(left),pivot,...快速排序(right)]
+        return [...快速排序(left), pivot, ...快速排序(right)]
+    }
+    function 选择排序(arr) {
+        for (let i = 1; i < arr.length; i++) {
+            for (let j = i - 1; j >= 0; j--) {
+                if (arr[j + 1] < arr[j]) {
+                    let temp = arr[j + 1]
+                    arr[j + 1] = arr[j]
+                    arr[j] = temp
+                } else {
+                    break
+                }
+            }
+        }
+        return arr;
     }
     // console.log(冒泡排序(arr))
     // console.log(选择排序(arr))
     // console.log(快速排序(arr))
+    console.log(选择排序(arr))
 
 
 
@@ -78,22 +93,22 @@
 
 
 
-    function maopaoSort(arr){//冒泡复习
-        for(let i=0;i<arr.length;i++){
-            for(let j=0;j<arr.length-i-1;j++){
-                if (arr[j]<arr[j+1]){
-                    let temp=arr[j]
-                    arr[j]=arr[j+1]
-                    arr[j+1]=temp
+    function maopaoSort(arr) {//冒泡复习
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] < arr[j + 1]) {
+                    let temp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = temp
                 }
             }
         }
     }
-    function xuanzeSort(arr){//选择复习
-        for(let i=0;i<arr.length-1;i++){
+    function xuanzeSort(arr) {//选择复习
+        for (let i = 0; i < arr.length - 1; i++) {
             let min = arr[i]
-            for(let j=i+1;i<arr.length;i++){
-                if(arr[j]<arr[min]){
+            for (let j = i + 1; i < arr.length; i++) {
+                if (arr[j] < arr[min]) {
                     minIndex = j
                 }
             }
@@ -103,8 +118,8 @@
         }
         return arr
     }
-    function quickSort(arr){//快速排序
-        const p=Math.floor(arr.splice(arr[length/2],1)[0]) 
+    function quickSort(arr) {//快速排序
+        const p = Math.floor(arr.splice(arr[length / 2], 1)[0])
     }
 
 

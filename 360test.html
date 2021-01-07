@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id ='btn'></input>
+</body>
+<script>
+    document.getElementById('btn').addEventListener('keyup', throttle(submit))
+
+function throttle(fn){
+    let flag = true
+    return function(args) {
+      if (!flag) return
+      flag = false
+      setTimeout(function(){
+          fn.call(this,args.target.value)
+          flag = true
+      },500)
+    }
+}
+function submit(e){
+    console.log(e)
+}
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // (
+    //     function () {
+    //         var a = b= 9
+    //     }
+    // )()
+    // console.log(a)
+    
+function sum(){
+    var num = arguments[0];
+    if(arguments.length==1){
+        return function(sec){
+            console.log(sec,'=========')
+            return num+sec;
+        }
+    }else{
+        var num = 0;
+        for(var i = 0;i<arguments.length;i++){
+            num = num + arguments[i];
+        }
+    return num;
+    }
+    }
+    console.log(sum(2)(3))
+    console.log(sum(2,3))
+</script>
+</html>

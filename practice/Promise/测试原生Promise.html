@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试原生Promise</title>
+</head>
+<body>
+</body>
+<script>
+    console.log('测试原生Promise')
+    //1.创建一个新的Promise
+    const p = new Promise((resolve,reject)=>{//执行器函数 
+        //2.负责执行异步任务
+        console.log('Promise的执行器函数调用了')
+        setTimeout(()=>{
+            const time = Date.now()
+            if (time%2==0){
+                //3.1 如果成功了调用resolve
+                resolve('执行器中执行的方法成功了',time)
+            }else{
+                //3.1 如果失败了调用reject
+                reject('执行器中执行的方法失败了',time)
+            }
+        },1000)
+    })
+    console.log('和.then中间的打印')
+    p.then(
+        value => {//接收得到成功的数据 onResolved
+            console.log('成功的回调',value)
+        },
+    ).catch(
+        reason => {//接收得到失败的数据 onRejectd
+            console.log('失败的回调',reason)
+        }
+    )
+</script>
+</html>

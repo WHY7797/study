@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var obj = {
+        sayName :function (param1,param2){
+            return this.name + param1 + param2
+        },
+        name : '哈哈哈哈哈哈'
+    }
+    var obj2 = {
+        name : 'HAHAHAHAHAHA'
+    }
+    console.log('obj.sayName是一个函数',typeof obj.sayName)//obj.sayName是一个函数
+    console.log(new obj.sayName)
+    console.log(new obj.sayName instanceof Object)
+    console.log(obj.sayName.call(obj2,'您好','啊'))//call的用法
+    console.log(obj.sayName.apply(obj2,['您好','啊']))//apply的用法
+    console.log('正常方式的bind:',obj.sayName.bind(obj2,'您好啊')('正常'))//bind的用法
+    const bindFun = obj.sayName.bind(obj2,'您好啊')
+    console.log('通过new的方式的bind:',new bindFun('new'))
+    //手写call
+    Function.prototype.myCall = function(obj){
+        obj = obj || window
+        obj.fn = this
+        const args = [...arguments].slice(1)
+        const result = obj.fn(...args)
+        delete obj.fn
+        return result
+    }
+    console.log(obj.sayName.myCall(obj2,'您好','啊'))//test
+    //手写apply
+    Function.prototype.myApply=function(obj){
+        obj = obj || window
+        obj.fun = this
+        let res
+        if(arguments[1]){
+            res = obj.fun(...arguments[1])
+        }else{
+            res = obj.fun()
+        }
+        delete obj.fun
+        return res
+    }
+    console.log(obj.sayName.myApply(obj2,['您好','啊']))//test
+    Function.prototype.myBind = function (obj){
+        obj = obj || window
+        const args = [...arguments].slice(1)
+        const This = this
+        console.log(This)
+        console.log(args)
+        return function fun2 (args2){
+            console.log(this)
+            console.log(args2)
+            if (this instanceof fun2){
+                return new This(...args,...args2)
+            }
+            return This.apply(obj,args.concat(...args2))
+        }
+    }
+    console.log('正常方式的bind:',obj.sayName.myBind(obj2,'您好啊')('正常'))//bind的用法
+    const MyBindFun = obj.sayName.myBind(obj2,'您好啊')//test
+    console.log('通过new的方式的bind:',new MyBindFun('new'))//test
+    function myInstanceOf(left,right){
+        left = left.__proto__
+        while(true){
+            if(left!==undefined||left!==null){
+                return false
+            }
+            if(left===right.prototype){
+                return true
+            }
+            left = left.__proto__
+        }
+    }
+    //new 的原理是什么 通过new的方式创建对象 和用字面量创建有什么区别
+    //在调用new的时候发生了四件事：
+    //1.新生成了一个对象
+    //2.连接到了原型
+    //3.绑定了this
+    //4.返回了新对象
+    /*
+        1.创建一个新对象
+        2.获取构造函数
+        3.设置空对象的原型
+        4.绑定this给构造函数
+        5.确保返回值是对象
+    */
+    function createObj(){
+        let obj = {}
+        let Con = [].shift.call(arguments)//删除数组的第一项 并返回删除项
+        console.log(Con)
+        obj.__proto__ = Con.prototype
+        let result = Con.apply(obj, arguments)
+        console.log(result)
+        if(result instanceof Object){
+            alert('萨达撒')
+            return result
+        }
+        else{
+            alert('SDSD')
+            return obj
+        }
+        // return result instanceof Object ? result : obj
+    }
+    function foo(name){
+        this.name = name
+        this.sayName = function(){
+            return this.name
+        }
+    }
+    foo.prototype.say = function (msg){
+        // console.log(this.name+msg)
+        return this.name+msg
+    }
+    console.log(createObj(foo,'hahaha'))//test
+    console.log({} instanceof Object)
+    console.log(Object.prototype)
+</script>
+</html>

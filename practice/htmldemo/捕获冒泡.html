@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div">
+        <p>
+          <span>test</span>
+        </p>
+      </div>
+</body>
+<script>
+    
+let div = document.getElementById('div')
+let p = document.querySelector('p')
+let span = document.querySelector('span')
+let body = document.body
+
+window.addEventListener('click', capture, true)
+window.addEventListener('click', bubble)
+
+body.addEventListener('click', capture, true)
+body.addEventListener('click', bubble)
+
+div.addEventListener('click', capture, true)
+div.addEventListener('click', bubble)
+
+p.addEventListener('click', capture, true)
+p.addEventListener('click', bubble)
+
+span.addEventListener('click', bubble)
+span.addEventListener('click', capture, true)
+//两个函数
+function capture(e) {
+  var nodeName = e.currentTarget == window ? 'window' : e.currentTarget.nodeName
+  console.log('捕获:' + nodeName)
+}
+function bubble(e) {
+    // e.stopPropagation()
+    e.stopImmediatePropagation()
+  var nodeName = e.currentTarget == window ? 'window' : e.currentTarget.nodeName
+  console.log('冒泡:' + nodeName)
+}
+//输出
+// 捕获:window
+// 捕获:BODY
+// 捕获:DIV
+// 捕获:P
+// 冒泡:SPAN
+// 捕获:SPAN
+// 冒泡:P
+// 冒泡:DIV
+// 冒泡:BODY
+// 冒泡:window
+</script>
+</html>

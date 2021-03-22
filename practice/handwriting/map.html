@@ -1,0 +1,20 @@
+<html>
+    <title>map</title>
+<script>
+    //直接Array.map()就可以调用到map方法，那他应该是在原型链上的，然后接收一个匿名函数做参数，通过循环调用传入的匿名函数
+    const arr= [1,2,3,4]
+    console.log(arr.map((item,index)=>{console.log(item)}))
+    Array.prototype.newMap = function(fn) {
+　　　　var newArr = []
+　　　　for(var i = 0; i<this.length; i++){
+　　　　　　newArr.push(fn(this[i],i,this))
+　　　　}
+　　　　return newArr
+　　}
+   arr.newMap((currentValue,index,arr)=>{
+     console.log("newMap当前元素"+currentValue)
+　　　console.log("newMap当前索引"+index)
+     console.log("newMap数组对象"+arr)
+   })
+</script>
+</html>

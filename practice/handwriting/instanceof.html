@@ -1,0 +1,17 @@
+<html>
+    <title>instanceof</title>
+<script>
+    function myInstanceOf(target,origin){
+        while(target){
+            if(target.__proto__===origin.prototype){
+                return true
+            }
+            target=target.__proto__
+        }
+        return false
+    }
+    const a = [1,2,3]
+    console.log(myInstanceOf(a,Array))
+    console.log(myInstanceOf(a,Object))
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //执行栈
+    function foo() {
+        throw new Error('error')
+    }
+    function bar() {
+        foo()
+    }
+    bar()
+    /*
+        bar 先执行
+        foo 后执行
+        foo 入栈
+    */
+   
+</script>
+
+</html>
